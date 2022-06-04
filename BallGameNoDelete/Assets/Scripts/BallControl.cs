@@ -11,6 +11,7 @@ public class BallControl : MonoBehaviour
     private float jumpTimer;
     public float jumpDuration;
     public float jumpForce;
+    bool jumpHeld;
 
     private void Start()
     {
@@ -18,7 +19,19 @@ public class BallControl : MonoBehaviour
         distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
-    private void Update()
+    void Update()
+    {
+        // remove jump potential after jump button is lifted
+        if (Input.GetButtonUp("Jump")) { jumpTimer = 0f; }
+
+        // is jumping
+        if (Input.GetButton("Jump"))
+            jumpHeld = true;
+        else
+            jumpHeld = false;
+    }
+
+    private void FixedUpdate()
     {
         // movement
         if (Input.GetAxis("Horizontal") > 0)
@@ -46,9 +59,8 @@ public class BallControl : MonoBehaviour
 
         // jumping
         if (isGrounded == true) { jumpTimer = jumpDuration; }
-        if (Input.GetButtonUp("Jump")) { jumpTimer = 0f; }
-
-        if (Input.GetButton("Jump")) // jump
+        
+        if (jumpHeld) // jump
         {
             if (jumpTimer > 0f)
             {
