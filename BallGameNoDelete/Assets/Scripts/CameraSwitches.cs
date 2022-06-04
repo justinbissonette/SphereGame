@@ -38,5 +38,10 @@ public class CameraSwitches : MonoBehaviour
             // set new angle
             targetAngle = Quaternion.Euler(0f, 0, 0);
         }
+        else if (collision.gameObject.tag == "SidescrollerFlip")
+        {
+            // set new angle
+            targetAngle = Quaternion.Euler(0f, -180f, 0);
+        }
     }
 }
