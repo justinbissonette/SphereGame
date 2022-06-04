@@ -320,7 +320,10 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.4f1/Editor/Data/NetStandard/ref/2.1.0/netstandard.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.4f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll"
+-r:"C:/Users/patri/OneDrive/Documents/GitHub/SphereGame/BallGameNoDelete/Library/PackageCache/com.unity.cinemachine@2.8.6/Runtime/ThirdParty/clipper_library.dll"
 -r:"C:/Users/patri/OneDrive/Documents/GitHub/SphereGame/BallGameNoDelete/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
+-r:"Library/Bee/artifacts/500b0aE.dag/Cinemachine.ref.dll"
+-r:"Library/Bee/artifacts/500b0aE.dag/com.unity.cinemachine.editor.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/500b0aE.dag/Unity.Services.Core.Analytics.ref.dll"
@@ -336,6 +339,7 @@
 -r:"Library/Bee/artifacts/500b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/BallControl.cs"
 "Assets/Scripts/CameraFollow.cs"
+"Assets/Scripts/CameraSwitches.cs"
 -langversion:9.0
 
 /deterministic
