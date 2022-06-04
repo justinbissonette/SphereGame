@@ -5,47 +5,61 @@ using UnityEngine;
 public class BallControl : MonoBehaviour
 {
     public float speed = 5;
-    private Rigidbody rigid;
-    public float jump = 500;
-    public float gravitypull = 300;
+    private Rigidbody rigidbody;
+    private float distToGround;
+    private bool isGrounded;
+    private float jumpTimer;
+    public float jumpDuration;
+    public float jumpForce;
 
     private void Start()
     {
-        rigid = gameObject.GetComponent<Rigidbody>();
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+        distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
     private void Update()
     {
+        // movement
         if (Input.GetAxis("Horizontal") > 0)
         {
-            rigid.AddForce(Vector3.right * speed);
-
+            rigidbody.AddForce(Vector3.right * speed);
         }
+
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            rigid.AddForce(Vector3.left * speed);
+            rigidbody.AddForce(Vector3.left * speed);
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            rigid.AddForce(Vector3.forward * speed);
+            rigidbody.AddForce(Vector3.forward * speed);
         }
 
         else if (Input.GetAxis("Vertical") < 0)
         {
-            rigid.AddForce(Vector3.back * speed);
+            rigidbody.AddForce(Vector3.back * speed);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        // check if grounded
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+
+        // jumping
+        if (isGrounded == true) { jumpTimer = jumpDuration; }
+
+        if (Input.GetButton("Jump")) // jump
         {
-            StartCoroutine(Jumping());
+            if (jumpTimer > 0f)
+            {
+                rigidbody.velocity = new Vector3(0f, jumpForce, 0f);
+                jumpTimer -= Time.deltaTime;
+            }
         }
-    }
 
-    IEnumerator Jumping()
-    {
-        rigid.AddForce(Vector3.up * jump);
-        yield return new WaitForSeconds(.5F);
-        rigid.AddForce(Vector3.down * gravitypull);
+        // increase fall speed
+        if (rigidbody.velocity.y < -0.1)
+        {
+            rigidbody.velocity += Vector3.up * Physics2D.gravity.y * 5f * Time.deltaTime;
+        }
     }
 }
