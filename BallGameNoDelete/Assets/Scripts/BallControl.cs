@@ -36,22 +36,22 @@ public class BallControl : MonoBehaviour
         // movement
         if (Input.GetAxis("Horizontal") > 0)
         {
-            rigidbody.AddForce(Vector3.right * speed);
+            rigidbody.AddForce(Vector3.right * speed * Time.deltaTime);
         }
 
         else if (Input.GetAxis("Horizontal") < 0)
         {
-            rigidbody.AddForce(Vector3.left * speed);
+            rigidbody.AddForce(Vector3.left * speed * Time.deltaTime);
         }
 
         if (Input.GetAxis("Vertical") > 0)
         {
-            rigidbody.AddForce(Vector3.forward * speed);
+            rigidbody.AddForce(Vector3.forward * speed * Time.deltaTime);
         }
 
         else if (Input.GetAxis("Vertical") < 0)
         {
-            rigidbody.AddForce(Vector3.back * speed);
+            rigidbody.AddForce(Vector3.back * speed * Time.deltaTime);
         }
 
         // check if grounded
@@ -64,7 +64,7 @@ public class BallControl : MonoBehaviour
         {
             if (jumpTimer > 0f)
             {
-                rigidbody.AddForce(Vector3.up * jumpForce);
+                rigidbody.AddForce(Vector3.up * jumpForce * Time.deltaTime);
                 //rigidbody.velocity = new Vector3(0f, jumpForce, 0f);
                 jumpTimer -= Time.deltaTime;
             }

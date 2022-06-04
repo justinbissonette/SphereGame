@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraSwitches : MonoBehaviour
 {
     public Transform camera;
-    Quaternion targetAngle;
+    Quaternion targetAngle, previousAngle, nextAngle;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,9 @@ public class CameraSwitches : MonoBehaviour
         if (collision.gameObject.tag == "TopDown")
         {
             // set new angle
-            targetAngle = Quaternion.Euler(90f, 0, 0);
+            previousAngle = targetAngle;
+            nextAngle = Quaternion.Euler(90f, 0, 0);
+            if (nextAngle != targetAngle)
         }
         else if (collision.gameObject.tag == "Isometric")
         {
