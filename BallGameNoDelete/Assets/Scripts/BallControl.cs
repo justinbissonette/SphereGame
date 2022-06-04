@@ -46,12 +46,14 @@ public class BallControl : MonoBehaviour
 
         // jumping
         if (isGrounded == true) { jumpTimer = jumpDuration; }
+        if (Input.GetButtonUp("Jump")) { jumpTimer = 0f; }
 
         if (Input.GetButton("Jump")) // jump
         {
             if (jumpTimer > 0f)
             {
-                rigidbody.velocity = new Vector3(0f, jumpForce, 0f);
+                rigidbody.AddForce(Vector3.up * jumpForce);
+                //rigidbody.velocity = new Vector3(0f, jumpForce, 0f);
                 jumpTimer -= Time.deltaTime;
             }
         }

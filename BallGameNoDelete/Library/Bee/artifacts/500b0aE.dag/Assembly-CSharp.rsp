@@ -340,6 +340,7 @@
 "Assets/Scripts/BallControl.cs"
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/CameraSwitches.cs"
+"Assets/Scripts/Rotation.cs"
 -langversion:9.0
 
 /deterministic
