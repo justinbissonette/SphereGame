@@ -8,6 +8,7 @@ TagManager:
   - Isometric
   - Sidescroller
   - SidescrollerFlip
+  - DeathZone
   layers:
   - Default
   - TransparentFX

@@ -11,6 +11,7 @@ public class CameraSwitches : MonoBehaviour
     void Start()
     {
         targetAngle = camera.transform.rotation;
+        previousAngle = targetAngle;
     }
 
     // Update is called once per frame
@@ -26,24 +27,55 @@ public class CameraSwitches : MonoBehaviour
         if (collision.gameObject.tag == "TopDown")
         {
             // set new angle
-            previousAngle = targetAngle;
             nextAngle = Quaternion.Euler(90f, 0, 0);
-            if (nextAngle != targetAngle)
+
+            // if the next angle is same as the current angle, then set the angle to the previous angle
+            if (nextAngle == targetAngle)
+                targetAngle = previousAngle;
+            else // if the next angle is different from the previous angle, set the angle to the next angle and save the previous
+            {
+                previousAngle = targetAngle; // save previous angle
+                targetAngle = nextAngle;
+            }
         }
         else if (collision.gameObject.tag == "Isometric")
         {
             // set new angle
-            targetAngle = Quaternion.Euler(35f, 0, 0);
+            nextAngle = Quaternion.Euler(35f, 0, 0);
+
+            if (nextAngle == targetAngle)
+                targetAngle = previousAngle;
+            else
+            {
+                previousAngle = targetAngle; // save previous angle
+                targetAngle = nextAngle;
+            }
         }
         else if (collision.gameObject.tag == "Sidescroller")
         {
             // set new angle
-            targetAngle = Quaternion.Euler(0f, 0, 0);
+            nextAngle = Quaternion.Euler(0, 0, 0);
+
+            if (nextAngle == targetAngle)
+                targetAngle = previousAngle;
+            else
+            {
+                previousAngle = targetAngle; // save previous angle
+                targetAngle = nextAngle;
+            }
         }
         else if (collision.gameObject.tag == "SidescrollerFlip")
         {
             // set new angle
-            targetAngle = Quaternion.Euler(0f, -180f, 0);
+            nextAngle = Quaternion.Euler(0, -180f, 0);
+
+            if (nextAngle == targetAngle)
+                targetAngle = previousAngle;
+            else
+            {
+                previousAngle = targetAngle; // save previous angle
+                targetAngle = nextAngle;
+            }
         }
     }
 }

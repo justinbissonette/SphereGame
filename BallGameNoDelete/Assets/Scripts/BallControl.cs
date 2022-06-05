@@ -12,6 +12,7 @@ public class BallControl : MonoBehaviour
     public float jumpDuration;
     public float jumpForce;
     bool jumpHeld;
+    public Transform spawnLoc;
 
     private void Start()
     {
@@ -19,19 +20,7 @@ public class BallControl : MonoBehaviour
         distToGround = GetComponent<Collider>().bounds.extents.y;
     }
 
-    void Update()
-    {
-        // remove jump potential after jump button is lifted
-        if (Input.GetButtonUp("Jump")) { jumpTimer = 0f; }
-
-        // is jumping
-        if (Input.GetButton("Jump"))
-            jumpHeld = true;
-        else
-            jumpHeld = false;
-    }
-
-    private void FixedUpdate()
+    private void Update()
     {
         // movement
         if (Input.GetAxis("Horizontal") > 0)
@@ -59,8 +48,11 @@ public class BallControl : MonoBehaviour
 
         // jumping
         if (isGrounded == true) { jumpTimer = jumpDuration; }
-        
-        if (jumpHeld) // jump
+
+        // remove jump potential after jump button is lifted
+        if (Input.GetButtonUp("Jump")) { jumpTimer = 0f; }
+
+        if (Input.GetButton("Jump")) // jump
         {
             if (jumpTimer > 0f)
             {
@@ -73,7 +65,15 @@ public class BallControl : MonoBehaviour
         // increase fall speed
         if (rigidbody.velocity.y < -0.1)
         {
-            rigidbody.velocity += Vector3.up * Physics2D.gravity.y * 5f * Time.deltaTime;
+            rigidbody.velocity += Vector3.up * Physics2D.gravity.y * (jumpForce / 1500f) * Time.deltaTime;
+        }
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "DeathZone")
+        {
+            transform.position = spawnLoc.position;
         }
     }
 }
